@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: kiro-power
+  description: "Kiro Power - plugin for Orca Security"
+  labels:
+    orca.security/is-production: "true"
+    orca.security/repo-is-fork: "false"
+    orca.security/repo-visibility: private
+  annotations:
+    github.com/project-slug: orcasecurity/kiro-power
+    github.com/team-slug: orcasecurity/team-agentic-ai
+    orca.security/repo-default-branch: master
+    orca.security/repo-main-language: Json
+  links:
+    - url: https://github.com/orcasecurity/kiro-power
+      title: Source Code
+      icon: github
+      type: url
+spec:
+  type: repository
+  lifecycle: experimental
+  owner: team-agentic-ai

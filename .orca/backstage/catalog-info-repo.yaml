@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: kiro-power
+  labels:
+    repository: kiro-power
+  annotations:
+    github.com/project-slug: orcasecurity/kiro-power
+  tags:
+    - repository
+    - github
+spec:
+  presence: optional
+  targets:
+    - ./repository-info.yaml
+    - ./catalog-component-locations.yaml

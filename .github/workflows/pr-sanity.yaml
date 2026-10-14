@@ -1,0 +1,60 @@
+name: PR CI Checks
+
+on: # yamllint disable-line rule:truthy
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  runner-selector:
+    uses: orcasecurity/ghrw-runner-selector/.github/workflows/runner-selector.yaml@v1
+    secrets: inherit
+    with:
+      cpu: 2
+      memory: 8
+
+  pre-commit-check:
+    name: Pre-commit checks
+    needs:
+      - runner-selector
+    runs-on: ${{ needs.runner-selector.outputs.runs-on }}
+    container:
+      image: 552936520451.dkr.ecr.us-east-1.amazonaws.com/orca/orca-github-workflow-images/extra:1.0.0
+      credentials:
+        username: AWS
+        password: ${{ secrets.ECR_TOKEN }}
+      volumes: ${{ fromJson(needs.runner-selector.outputs.container-volumes) }}
+      env: ${{ fromJson(needs.runner-selector.outputs.container-environment) }}
+
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "^1.26.0"
+
+      - run: pip install checkov==3.3.9
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.63.1
+
+      - name: Install golangci-lint
+        run: go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.12.2
+
+      - name: Install terraform-docs
+        run: go install github.com/terraform-docs/terraform-docs@v0.24.0
+
+      - name: Install gofumpt
+        run: go install mvdan.cc/gofumpt@v0.11.0
+
+      - uses: pre-commit/action@v3.0.1
