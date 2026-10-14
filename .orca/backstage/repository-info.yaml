@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: kiro-power
-  description: "Kiro Power - plugin for Orca Security"
+  description: "Kiro plugin/power for Orca Security"
   labels:
     orca.security/is-production: "true"
     orca.security/repo-is-fork: "false"
