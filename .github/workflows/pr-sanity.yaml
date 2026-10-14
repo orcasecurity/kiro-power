@@ -30,7 +30,6 @@ jobs:
       volumes: ${{ fromJson(needs.runner-selector.outputs.container-volumes) }}
       env: ${{ fromJson(needs.runner-selector.outputs.container-environment) }}
 
-
     steps:
       - uses: actions/checkout@v5
 
