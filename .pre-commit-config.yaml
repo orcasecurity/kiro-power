@@ -33,3 +33,19 @@ repos:
     hooks:
       - id: shellcheck
         files: \.(ba|z|fish|ksh|sh)$
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.38.2
+    hooks:
+      - id: check-jsonschema
+        name: Validate plugin.json against Agent Plugins schema
+        files: ^plugin\.json$
+        args:
+          - --schemafile
+          - https://agent-plugins.org/schemas/1.0.0/plugin.schema.json
+      - id: check-jsonschema
+        name: Validate mcp.json against Agent Plugins schema
+        files: ^mcp\.json$
+        args:
+          - --schemafile
+          - https://agent-plugins.org/schemas/1.0.0/mcp.schema.json
