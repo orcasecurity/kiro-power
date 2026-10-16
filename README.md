@@ -12,8 +12,8 @@ https://github.com/orcasecurity/kiro-power
 
 ## Authentication
 
-The power uses OAuth.
-On first use, Kiro opens a browser window to sign in with your Orca account.
+After installing, the `orca-security` server shows as **Unauthenticated** in Kiro's MCP Servers panel.
+Click **Authenticate** next to it, and Kiro opens a browser window to sign in with your Orca account using OAuth2.
 
 ## Privacy Policy
 
